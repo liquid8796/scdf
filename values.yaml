@@ -132,21 +132,14 @@ server:
     metricsDashboard: ""
     ## @param server.configuration.defaultSpringApplicationJSON Injects default values for environment variable SPRING_APPLICATION_JSON
     ## {
-    "maven": {
-        "local-repository": null,
-        "remote-repositories": {
-            "repo1": {
-                "url": "https://repo.spring.io/libs-snapshot",
-            },
-            "nexus": {
-                "url": "https://repo.spring.io/libs-snapshot",
-                "auth": {
-                    "username": "",
-                    "password": ""
-                }
-            }
-        }
-    }
+    ##   "maven": {
+    ##     "local-repository": null,
+    ##     "remote-repositories": {
+    ##       "repo1": {
+    ##         "url": "https://repo.spring.io/libs-snapshot"
+    ##       }
+    ##     }
+    ##   }
     ## }
     ##
     defaultSpringApplicationJSON: true
@@ -439,7 +432,7 @@ server:
   service:
     ## @param server.service.type Kubernetes service type
     ##
-    type: ClusterIP
+    type: NodePort
     ## @param server.service.ports.http Server HTTP port
     ##
     ports:
@@ -447,7 +440,7 @@ server:
     ## @param server.service.nodePort Specify the nodePort value for the LoadBalancer and NodePort service types
     ## ref: https://kubernetes.io/docs/concepts/services-networking/service/#type-nodeport
     ##
-    nodePort: ""
+    nodePort: 30001
     ## @param server.service.clusterIP Dataflow server service cluster IP
     ## e.g:
     ## clusterIP: None
@@ -1814,7 +1807,7 @@ waitForBackends:
 mariadb:
   ## @param mariadb.enabled Enable/disable MariaDB chart installation
   ##
-  enabled: true
+  enabled: false
   jdbcParameter:
     ## @param mariadb.jdbcParameter.useMysqlMetadata Use MariaDB useMysqlMetadata parameter.
     useMysqlMetadata: true
@@ -1915,7 +1908,7 @@ externalDatabase:
   ## @param externalDatabase.hibernateDialect Hibernate Dialect used by Dataflow/Skipper servers
   ## e.g: org.hibernate.dialect.MariaDB102Dialect
   ##
-  hibernateDialect: "org.hibernate.dialect.MariaDB106Dialect"
+  hibernateDialect: "org.hibernate.dialect.MariaDB105Dialect"
   ## Data Flow user and database
   ##
   dataflow:
@@ -1928,10 +1921,10 @@ externalDatabase:
     url: "jdbc:mariadb://18.141.172.99:3306/dataflow"
     ## @param externalDatabase.dataflow.database Name of the existing database to be used by Dataflow server. Ignored if url is provided
     ##
-    database: "dataflow"
+    database: dataflow
     ## @param externalDatabase.dataflow.username Existing username in the external db to be used by Dataflow server
     ##
-    username: "jarvis"
+    username: jarvis
     ## @param externalDatabase.dataflow.password Password for the above username. Ignored if existing secret is provided
     ##
     password: "Password@123"
